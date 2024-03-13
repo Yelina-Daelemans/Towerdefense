@@ -23,14 +23,28 @@ public class EnemySpawner : MonoBehaviour
     {
         var newEnemy = Instantiate(Enemies[type], Path1[0].transform.position, Path1[0].transform.rotation);
         var script = newEnemy.GetComponentInParent<Enemy>();
+
+        // zet hier het path en target voor je enemy in 
+
+        script.path = path;
+        script.target = Path1[1];
     }
     private void SpawnTester()
     {
         SpawnEnemy(0, Path.Path1);
     }
+    public GameObject RequestTarget(Path path, int index)
+    {
+        // moet er voor zorgen dat de vijand kan bewegen.
+        // gebruik de speed van de enemy class.
+        GetComponent<Enemy>().path = path;
+
+
+    }
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("SpawnTester", 1f, 1f);
         
     }
 
