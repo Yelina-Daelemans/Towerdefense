@@ -21,6 +21,37 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float step = speed * Time.deltaTime;
+
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
+
+
+
+        // check how close we are to the target 
+
+        if (Vector2.Distance(transform.position, target.transform.position) < 0.1f)
+
+        {
+
+            // if close, request a new waypoint 
+
+            target = EnemySpawner.instance.RequestTarget(path, pathIndex);
+            pathIndex++;
+
+
+
+            // if target is null, we have reached the end of the path. 
+
+            // Destroy the enemy at this point 
+
+            if (target == null)
+
+            {
+
+                Destroy(gameObject);
+
+            }
+
+        }
     }
 }
