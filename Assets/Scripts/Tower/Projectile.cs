@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
         // When target is null, destroy this projectile
         if (target == null)
         {
-            Destroy(gameObject);
+            GameObject.Destroy(this);
             return;
         }
 

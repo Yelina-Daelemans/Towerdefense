@@ -35,7 +35,6 @@ public class EnemySpawner : MonoBehaviour
     }
     public GameObject RequestTarget(Path path, int index)
     {
-
         List<GameObject> currentPath;
     switch (path)
     {
