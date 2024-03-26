@@ -94,7 +94,6 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnEnemy(0, Path.Path2);
         }
-        else if (ufoCounter < 75)
         else
         {
             // the last Enemy will be level 2 
