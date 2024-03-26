@@ -29,9 +29,163 @@ public class EnemySpawner : MonoBehaviour
         script.path = path;
         script.target = Path1[1];
     }
-    private void SpawnTester()
+    private int ufoCounter = 0;
+    public void StartWave(int number)
     {
-        SpawnEnemy(0, Path.Path1);
+        // reset counter 
+        ufoCounter = 0;
+        switch (number)
+        {
+            case 1:
+                InvokeRepeating("StartWave1", 1f, 1.5f);
+                break;
+        }
+    }
+    public void StartWave1()
+    {
+        ufoCounter++;
+        // leave some gaps 
+        if (ufoCounter % 6 <= 1) return;
+        if (ufoCounter < 30)
+        {
+            SpawnEnemy(0, Path.Path1);
+        }
+        else if (ufoCounter <= 50)
+        {
+            SpawnEnemy(0, Path.Path2);
+        }
+        else if (ufoCounter < 75)
+        {
+            SpawnEnemy(1, Path.Path1);
+        }
+        else if (ufoCounter <= 100)
+        {
+            SpawnEnemy(1, Path.Path1);
+            SpawnEnemy(0, Path.Path2);
+        }
+        else if (ufoCounter <= 100)
+        {
+            SpawnEnemy(0, Path.Path1);
+            SpawnEnemy(1, Path.Path2);
+        }
+        else if (ufoCounter <= 150)
+        {
+            SpawnEnemy(2, Path.Path1);
+            SpawnEnemy(3, Path.Path2);
+        }
+        else
+        {
+            // the last Enemy will be level 2 
+            SpawnEnemy(1, Path.Path1);
+        }
+        if (ufoCounter > 30)
+        {
+            CancelInvoke("StartWave1"); // the reverse of InvokeRepeating 
+            // depending on your singleton declaration, Get might be somthing else 
+            GameManager.Instance.EndWave(); // let the gameManager know. 
+        }
+    }
+    public void StartWave2()
+    {
+        ufoCounter++;
+        // leave some gaps 
+        if (ufoCounter % 6 <= 1) return;
+         if (ufoCounter <= 50)
+        {
+            SpawnEnemy(0, Path.Path2);
+        }
+        else if (ufoCounter < 75)
+        else
+        {
+            // the last Enemy will be level 2 
+            SpawnEnemy(1, Path.Path1);
+        }
+        if (ufoCounter > 30)
+        {
+            CancelInvoke("StartWave1"); // the reverse of InvokeRepeating 
+            // depending on your singleton declaration, Get might be somthing else 
+            GameManager.Instance.EndWave(); // let the gameManager know. 
+        }
+    }
+    public void StartWave3()
+    {
+        ufoCounter++;
+        // leave some gaps 
+        if (ufoCounter % 6 <= 1) return;
+         if(ufoCounter < 75)
+        {
+            SpawnEnemy(1, Path.Path1);
+        }
+        else if (ufoCounter <= 100)
+        {
+            SpawnEnemy(1, Path.Path1);
+            SpawnEnemy(0, Path.Path2);
+        }
+        else
+        {
+            // the last Enemy will be level 2 
+            SpawnEnemy(1, Path.Path1);
+        }
+        if (ufoCounter > 30)
+        {
+            CancelInvoke("StartWave1"); // the reverse of InvokeRepeating 
+            // depending on your singleton declaration, Get might be somthing else 
+            GameManager.Instance.EndWave(); // let the gameManager know. 
+        }
+    }
+    public void StartWave4()
+    {
+        ufoCounter++;
+        // leave some gaps 
+        if (ufoCounter % 6 <= 1) return;
+        if (ufoCounter <= 100)
+        {
+            SpawnEnemy(1, Path.Path1);
+            SpawnEnemy(0, Path.Path2);
+        }
+        else
+        {
+            // the last Enemy will be level 2 
+            SpawnEnemy(1, Path.Path1);
+        }
+        if (ufoCounter > 30)
+        {
+            CancelInvoke("StartWave1"); // the reverse of InvokeRepeating 
+            // depending on your singleton declaration, Get might be somthing else 
+            GameManager.Instance.EndWave(); // let the gameManager know. 
+        }
+    }
+    public void StartWave5()
+    {
+        ufoCounter++;
+        // leave some gaps 
+        if (ufoCounter % 6 <= 1) return;
+        if (ufoCounter <= 100)
+        {
+            SpawnEnemy(0, Path.Path1);
+            SpawnEnemy(1, Path.Path2);
+        }
+        else if (ufoCounter <= 150)
+        {
+            SpawnEnemy(2, Path.Path1);
+            SpawnEnemy(3, Path.Path2);
+        }
+        else if (ufoCounter <= 151)
+        {
+            SpawnEnemy(3, Path.Path1);
+            SpawnEnemy(3, Path.Path2);
+        }
+        else
+        {
+            // the last Enemy will be level 2 
+            SpawnEnemy(1, Path.Path1);
+        }
+        if (ufoCounter > 30)
+        {
+            CancelInvoke("StartWave1"); // the reverse of InvokeRepeating 
+            // depending on your singleton declaration, Get might be somthing else 
+            GameManager.Instance.EndWave(); // let the gameManager know. 
+        }
     }
     public GameObject RequestTarget(Path path, int index)
     {

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private int Credits;
     private int Health;
     private int CurrentWave;
-    
+    private bool waveActive = false;
     public void SelectSite(ConstructionSite site)
     {
         // remember the selected site 
@@ -41,6 +41,14 @@ public class GameManager : MonoBehaviour
         if(ConstructionSite == null) 
         {
             return;
+        }
+        if (level == SiteLevel.onbebouwd)
+        {
+            AddCredits(GetCost(type, level, true));
+        }
+        else 
+        {
+            Credits -= GetCost(type, level, false);
         }
         // use switch with the towertype to select the correct list 
         switch(type) 
@@ -74,6 +82,7 @@ public class GameManager : MonoBehaviour
         topMenu.SetCreditLabel("Credits: " + Credits);
         topMenu.SetHealthLabel("Gate Health: "+Health);
         topMenu.SetWaveLabel("Current wave: "+CurrentWave);
+        while (true) { waveActive = false; }
     }
     public void AttackGate()
     {
@@ -100,8 +109,8 @@ public class GameManager : MonoBehaviour
     public int GetCredits()
     {
         // you can figure this out 
+        //Ik heb geen idee wat dat ik hier in moet doen.
         return Credits;
-
     }
     public int GetCost(TowerType type, SiteLevel level, bool selling = false)
     {
@@ -157,9 +166,27 @@ public class GameManager : MonoBehaviour
         {
             cost /= 2; // For example, halve the cost when selling
         }
-
         return cost;
         // the return should be lower if you are selling 
+    }
+    public void StartWave()
+    {
+        // increase the value of currentWave 
+        // change the label for the current wave in topMenu 
+        // change waveActive to true 
+        CurrentWave++;
+
+        // Verander het label voor de huidige golf in topMenu
+        topMenu.SetWaveLabel("Current wave: " + CurrentWave);
+
+        // Verander waveActive naar true
+        waveActive = true;
+        EnemySpawner.instance.StartWave(0);
+    }
+    public void EndWave()
+    {
+        // change waveActive to false 
+        waveActive = false;
     }
     // Start is called before the first frame update
     void Start()

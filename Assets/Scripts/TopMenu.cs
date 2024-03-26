@@ -35,7 +35,6 @@ public class TopMenu : MonoBehaviour
     }
     private void OnPlayButtonClicked()
     {
-        // Implement play button functionality here
         GameManager.Instance.StartGame();
     }
     public void SetHealthLabel(string text)
