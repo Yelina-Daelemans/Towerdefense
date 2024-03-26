@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public Transform target;
     public float speed;
     public int damage;
+    public GameObject Target;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,14 @@ public class Projectile : MonoBehaviour
         // Check if the distance between this object and the target is smaller than 0.1. If so, destroy this object
         if (Vector3.Distance(transform.position, target.position) < 0.2f)
         {
+            // Check if the collided object has an Enemy component
+            Enemy enemy = target.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                // Apply damage to the enemy
+                enemy.Damage(damage);
+            }
+
             Destroy(gameObject);
         }
     }
