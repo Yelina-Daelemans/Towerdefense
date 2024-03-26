@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/WaveStyle.uss?fileID=7433441132597879392&amp;guid=fcf4ac49f0ef2ec40a323fd1a9876c77&amp;type=3#WaveStyle" />
+    <ui:Label tabindex="-1" text="Wave: 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveLabel" style="width: 93px; top: 68%; -unity-text-align: upper-left; -unity-font-style: normal; color: rgb(255, 255, 255);" />
+    <ui:Label tabindex="-1" text="Credits: 200" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreditLabel" style="width: 118px; top: 54%; -unity-text-align: upper-left; left: 17%; color: rgb(255, 255, 255); -unity-font-style: normal;" />
+    <ui:Label tabindex="-1" text="Gate health: 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GateHealth" style="width: 129px; top: 55%; left: 17%; -unity-font-style: normal; color: rgb(255, 255, 255);" />
+    <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Play" class="Play" style="top: 35%;" />
+</ui:UXML>

@@ -18,7 +18,13 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Swords;
     public List<GameObject> Wizards;
     public ConstructionSite ConstructionSite;
-    public GameObject tower;
+    private GameObject tower;
+    private TopMenu topMenu;
+    public GameObject Topmenu;
+    private int Credits;
+    private int Health;
+    private int CurrentWave;
+    
     public void SelectSite(ConstructionSite site)
     {
         // remember the selected site 
@@ -60,11 +66,107 @@ public class GameManager : MonoBehaviour
             towerMenu.SetSite(null);
         }
     }
-    
+    public void StartGame() 
+    {
+        Credits = 200;
+        Health = 10;
+        CurrentWave = 0;
+        topMenu.SetCreditLabel("Credits: " + Credits);
+        topMenu.SetHealthLabel("Gate Health: "+Health);
+        topMenu.SetWaveLabel("Current wave: "+CurrentWave);
+    }
+    public void AttackGate()
+    {
+        // reduce health with 1 
+        Health -= 1;
+        // update the label in topmenu 
+        topMenu.SetHealthLabel("Gate Health: " + Health);
+    }
+    public void AddCredits(int amount)
+    {
+        // update credits 
+        Credits += amount;
+        // update the label in topMenu 
+        topMenu.SetCreditLabel("Credits: " + Credits);
+        // evaluate the tower menu. This does nothing for now, 
+        // but we will soon add code over there to check for credits 
+        towerMenu.EvaluateMenu();
+    }
+    public void RemoveCredits(int amount)
+    {
+        // similar to the previous function 
+        Credits -= amount;
+    }
+    public int GetCredits()
+    {
+        // you can figure this out 
+        return Credits;
+
+    }
+    public int GetCost(TowerType type, SiteLevel level, bool selling = false)
+    {
+        int cost = 0;
+        // return the cost for every type of tower
+        switch (type) 
+        {
+            case TowerType.Archer:
+                switch (level)
+                {
+                    case SiteLevel.Level1:
+                        cost = 50;
+                        break;
+                        case SiteLevel.Level2:
+                        cost = 200;
+                        break;
+                        case SiteLevel.Level3:
+                        cost = 350;
+                        break;
+                }
+                break;
+            case TowerType.Sword:
+                switch (level)
+                {
+                    case SiteLevel.Level1:
+                        cost = 50;
+                        break;
+                    case SiteLevel.Level2:
+                        cost = 200;
+                        break;
+                    case SiteLevel.Level3:
+                        cost = 350;
+                        break;
+                }
+                break;
+            case TowerType.Wizard:
+                switch (level)
+                {
+                    case SiteLevel.Level1:
+                        cost = 50;
+                        break;
+                    case SiteLevel.Level2:
+                        cost = 200;
+                        break;
+                    case SiteLevel.Level3:
+                        cost = 350;
+                        break;
+                }
+                break;
+        }
+        // Reduce the cost if selling
+        if (selling)
+        {
+            cost /= 2; // For example, halve the cost when selling
+        }
+
+        return cost;
+        // the return should be lower if you are selling 
+    }
     // Start is called before the first frame update
     void Start()
     {
         towerMenu = TowerMenu.GetComponent<TowerMenu>();
+        topMenu = Topmenu.GetComponent<TopMenu>();
+        StartGame();
     }
     // Update is called once per frame
     void Update()

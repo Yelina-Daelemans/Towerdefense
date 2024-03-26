@@ -14,11 +14,11 @@ public class TowerMenu : MonoBehaviour
     void Start()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
-        archerButton = root.Q<Button>("archer-button");
-        swordButton = root.Q<Button>("sword-button");
-        wizardButton = root.Q<Button>("wizard-button");
-        updateButton = root.Q<Button>("button-upgrade");
-        destroyButton = root.Q<Button>("button-destroy");
+        archerButton = root.Q<Button>("Archer");
+        swordButton = root.Q<Button>("Sword");
+        wizardButton = root.Q<Button>("Wizard");
+        updateButton = root.Q<Button>("Upgrade");
+        destroyButton = root.Q<Button>("Delete");
         if (archerButton != null)
         {
             archerButton.clicked += OnArcherButtonClicked;
@@ -104,13 +104,15 @@ public class TowerMenu : MonoBehaviour
         // Hint: use a switch for this logic. 
         switch (selectedSite.SiteLevel)
         {
-            case 0:
-                updateButton.SetEnabled(false);
-                destroyButton.SetEnabled(false);
-                break;
+            
             case SiteLevel.Level1:
-                
-                case SiteLevel.Level2:
+                updateButton.SetEnabled(true);
+                destroyButton.SetEnabled(true);
+                archerButton.SetEnabled(false);
+                swordButton.SetEnabled(false);
+                wizardButton.SetEnabled(false);
+                break;
+            case SiteLevel.Level2:
                 updateButton.SetEnabled(true);
                 destroyButton.SetEnabled(true);
                 archerButton.SetEnabled(false);
@@ -123,6 +125,10 @@ public class TowerMenu : MonoBehaviour
                 archerButton.SetEnabled(false);
                 swordButton.SetEnabled(false);
                 wizardButton.SetEnabled(false);
+                break;
+                default:
+                updateButton.SetEnabled(false);
+                destroyButton.SetEnabled(false);
                 break;
         }
     }

@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-    //^(?([^\r\n])\s)*\r?$\r?\n
+    //^(?([^\r\n])\s)*\r?$\r?\n this is for removing blank lines -> control+ H type this in find in and select "Use Regular Expression" than press replace all.
     public void Damage(int damage = 1)
     {
         // lower the health value 
